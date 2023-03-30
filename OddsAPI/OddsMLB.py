@@ -6,7 +6,7 @@ import json
 
 
 
-sport = 'basketball_nba'
+sport = 'baseball_mlb'
 regions = 'us'
 oddsFormat = 'decimal'
 markets = 'h2h,spreads,totals'
@@ -31,7 +31,7 @@ result_list = json.loads(response.text)
 
 myclient = pymongo.MongoClient(config.mango)
 mydb = myclient["Odds"]
-mycol = mydb["NBA"]
+mycol = mydb["MLB"]
 
 for r in range(len(result_list)):
     x = mycol.insert_one(result_list[r])
