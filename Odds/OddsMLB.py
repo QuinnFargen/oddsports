@@ -1,9 +1,10 @@
 
-import pymongo
+# import pymongo
 import config
 import requests
 import json
 
+from Storage.OddsMongo import mongo_insertone
 
 
 sport = 'baseball_mlb'
@@ -22,16 +23,19 @@ status_code = response.status_code
 # result = response.text
 # print(result)
 result_list = json.loads(response.text)
-# len(result_list)
+len(result_list)
 # result_list[0]
 # response.json()
 
 ################
 # MongoDB
 
-myclient = pymongo.MongoClient(config.mango)
-mydb = myclient["Odds"]
-mycol = mydb["MLB"]
 
-for r in range(len(result_list)):
-    x = mycol.insert_one(result_list[r])
+mongo_insertone('Stats', 'MLB', result_list, loop=1)
+
+# myclient = pymongo.MongoClient(config.mango)
+# mydb = myclient["Odds"]
+# mycol = mydb["MLB"]
+
+# for r in range(len(result_list)):
+#     x = mycol.insert_one(result_list[r])
